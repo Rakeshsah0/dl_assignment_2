@@ -163,7 +163,7 @@ def training(epochs, model, train_loader, device, opt, loss_fn, val_loader):
 
 #definition of main function which is called from every sweep
 def mainFunction():
-    wb.init(project="dl_assignment_3_cnn")
+    wb.init(project="dl_assignment_2_cnn")
     config = wb.config
     run_name = f'{config.optimizer}{config.dense_neurons}{config.activations}{config.batch_normalisation}{config.dropout}{config.num_filters}_{config.learning_rate}'
     # Set the run name
@@ -246,6 +246,6 @@ sweep_config = {
 
 # execution of code using sweep configuration and mapping the appropriate function to it
 
-sweep_id = wb.sweep(sweep=sweep_config,project='dl_assignment_3_cnn')
+sweep_id = wb.sweep(sweep=sweep_config,project='dl_assignment_2_cnn')
 wb.agent(sweep_id, function = mainFunction , count = 30)
 wb.finish()
