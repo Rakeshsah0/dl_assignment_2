@@ -97,7 +97,7 @@ dataset = torchvision.datasets.ImageFolder(root='/inaturalist_12K/train',transfo
 val_size = int(0.2 * len(dataset))
 train_size = len(dataset)-val_size
 train_dataset, val_dataset = torch.utils.data.random_split(dataset, [train_size, val_size])
-test_dataset = torchvision.datasets.ImageFolder(root='/inaturalist_12K/val',transform=transform)
+test_dataset = torchvision.datasets.ImageFolder(root='/inaturalist_12K/test',transform=transform)
 
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shuffle=True)
