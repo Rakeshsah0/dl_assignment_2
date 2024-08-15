@@ -249,3 +249,18 @@ sweep_config = {
 sweep_id = wb.sweep(sweep=sweep_config,project='dl_assignment_2_cnn')
 wb.agent(sweep_id, function = mainFunction , count = 30)
 wb.finish()
+
+
+# best hyperparameters from sweep
+epochs = 10
+input_shape = (3, 224, 224)
+num_filters = [32, 64, 128, 256, 512]
+filter_sizes = [3, 3, 3, 3, 3]
+activation = ['Mish','Mish','Mish','Mish','Mish']
+pool_sizes = [2, 2, 2, 2, 2]
+dense_neurons = 256
+num_classes = 10
+use_batch_norm = True
+dropout_prob = 0.2
+optimiser = 'adam'
+lr = 0.0001
