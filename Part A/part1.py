@@ -252,7 +252,8 @@ wb.finish()
 
 
 # best hyperparameters from sweep
-epochs = 10
+
+epochs = 3
 input_shape = (3, 224, 224)
 num_filters = [32, 64, 128, 256, 512]
 filter_sizes = [3, 3, 3, 3, 3]
@@ -263,4 +264,4 @@ num_classes = 10
 use_batch_norm = True
 dropout_prob = 0.2
 optimiser = 'adam'
-lr = 0.0001
+learning_rate = 0.0001
