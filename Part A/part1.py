@@ -414,3 +414,7 @@ loss_fn= nn.CrossEntropyLoss()
 training_and_evaluation(epochs, model, train_loader, val_loader, test_loader, device, opt, loss_fn, classes)
 # Finish the WandB run
 wb.finish()
+model.cpu()
+del model
+gc.collect()
+torch.cuda.empty_cache()
