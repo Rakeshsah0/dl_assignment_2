@@ -13,6 +13,8 @@ import random
 import seaborn as sns
 from sklearn.metrics import confusion_matrix
 import torch.nn.functional as F
+from torchvision.models import ResNet50_Weights
+
 
 
 transform = transforms.Compose([transforms.Resize((224, 224)),transforms.ToTensor(),transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
@@ -184,4 +186,28 @@ def training_and_evaluation(epochs, model, train_loader, val_loader, test_loader
 
 
 
+# finetuning 
+epochs = 10
+num_classes = 10
+learning_rate = 0.0001
+optimiser='adam'
+wb.init(project="FineTune_CNN_DL2_Test_Evaluation", config={
+    "epochs": epochs,
+    "num_classes": num_classes,
+    "learning_rate": learning_rate,
+    "optimiser": optimiser,
+})
 
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+print(device)
+model = fineTuneCNN(num_classes).to(device)
+optimizers = {'adam': optim.Adam,'nadam': optim.Adam}
+opt=optimizers[optimiser.lower()](model.parameters(),lr=learning_rate)
+loss_fn= nn.CrossEntropyLoss()
+training_and_evaluation(epochs, model, train_loader, val_loader, test_loader, device, opt, loss_fn, num_classes)
+# Finish the WandB run
+wb.finish()
+model.cpu()
+del model
+gc.collect()
+torch.cuda.empty_cache()
