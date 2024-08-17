@@ -29,3 +29,42 @@ val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shu
 test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
 classes = ('Amphibia', 'Animalia', 'Arachnida', 'Aves','Fungi', 'Insecta', 'Mammalia', 'Mollusca', 'Plantae', 'Reptilia')
+
+
+# def freeze_up_to_k(k):
+#     model = models.resnet50(pretrained=True)
+#     layer_num = 0
+#     for child in model.children():
+#         layer_num += 1
+#         if layer_num <= k:
+#             for param in child.parameters():
+#                 param.requires_grad = False
+#     return model
+
+
+# def freeze_rest_after_k(k):
+#     model = models.resnet50(pretrained=True)
+#     layer_num = 0
+#     for child in model.children():
+#         layer_num += 1
+#         if layer_num > k:
+#             for param in child.parameters():
+#                 param.requires_grad = False
+#     return model
+
+
+def fineTuneCNN(num_classes):
+    # Load pre-trained ResNet50 model
+    model = torchvision.models.resnet50(weights=ResNet50_Weights.DEFAULT)
+
+    # Freeze all layers except the final classification layer
+    for param in model.parameters():
+        param.requires_grad = False
+
+    # Modify the final classification layer
+    num_ftrs = model.fc.in_features
+    model.fc = nn.Linear(num_ftrs, num_classes)
+
+    return model
+
+
