@@ -25,6 +25,9 @@ The CNN model is constructed with the following key components:
 
 The model is trained and evaluated on the [iNaturalist 12K](https://storage.googleapis.com/wandb_datasets/nature_12K.zip
 ) dataset, which consists of images belonging to 10 different classes. The dataset is divided into training, validation, and test sets. Data transformations include resizing images to 224x224 pixels and normalizing pixel values.
+- **Training Set**: 80% of the images for model training.
+- **Validation Set**: 20% of the training images for hyperparameter tuning and model validation.
+- **Test Set**: A separate set of images used to evaluate the model's performance.
 
 ## Hyperparameter Tuning
 
