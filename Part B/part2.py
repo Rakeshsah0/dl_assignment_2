@@ -20,11 +20,11 @@ from torchvision.models import ResNet50_Weights
 transform = transforms.Compose([transforms.Resize((224, 224)),transforms.ToTensor(),transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 batch_size = 32
 # Load iNaturalist12k dataset
-dataset = torchvision.datasets.ImageFolder(root='/kaggle/input/inaturalist12k/Data/inaturalist_12K/train',transform=transform)
+dataset = torchvision.datasets.ImageFolder(root='/inaturalist_12K/train',transform=transform)
 val_size = int(0.2 * len(dataset))
 train_size = len(dataset)-val_size
 train_dataset, val_dataset = torch.utils.data.random_split(dataset, [train_size, val_size])
-test_dataset = torchvision.datasets.ImageFolder(root='/kaggle/input/inaturalist12k/Data/inaturalist_12K/val',transform=transform)
+test_dataset = torchvision.datasets.ImageFolder(root='/inaturalist_12K/val',transform=transform)
 
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shuffle=True)
