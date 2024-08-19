@@ -69,5 +69,5 @@ The following visualizations and metrics are logged to WandB:
 
 To run project type:
 ```bash
-python part1.py
+python part2.py
 ```
